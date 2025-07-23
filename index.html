@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Splits sneller dan juf An</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body onload="load()">
+        <div id="flash"></div>
+        <div id="timeBarContainer">
+            <div id="timeBar"></div>
+        </div>
+        <div id="sumContainer">
+            <p><span id="sumId">1</span></p>
+        </div>
+        <div id="splitContainer">
+            <p id="splitLeft">1</p>
+            <p id="splitRight">_</p>
+        </div>
+
+        <svg width="100%" height="100%">
+            <line id="leftLine" x1="50%" y1="20%" x2="40%" y2="40%"></line>
+            <line id="rightLine" x1="50%" y1="20%" x2="60%" y2="40%"></line>
+        </svg>
+
+        <div id="inputContainer">
+            <div id="dig1" class="digit">1</div>
+            <div id="dig2" class="digit">2</div>
+            <div id="dig3" class="digit">3</div>
+            <div id="dig4" class="digit">4</div>
+            <div id="dig5" class="digit">5</div>
+            <div id="dig6" class="digit">6</div>
+            <div id="dig7" class="digit">7</div>
+            <div id="dig8" class="digit">8</div>
+            <div id="dig9" class="digit">9</div>
+            <div id="dig0" class="digit">0</div>
+        </div>
+        <!--potential delete feature-->
+        <div id="delete">❌</div>
+        <div id="difficultyContainer">
+            <div id="easy">gemakkelijk</div>
+            <div id="hard">moeilijk</div>
+        </div>
+        <div id="choiceContainer">
+            <div id="choice1" class="choiceDigit">1</div>
+            <div id="choice2" class="choiceDigit">2</div>
+            <div id="choice3" class="choiceDigit">3</div>
+            <div id="choice4" class="choiceDigit">4</div>
+            <div id="choice5" class="choiceDigit">5</div>
+            <div id="choice6" class="choiceDigit">6</div>
+            <div id="choice7" class="choiceDigit">7</div>
+            <div id="choice8" class="choiceDigit">8</div>
+            <div id="choice9" class="choiceDigit">9</div>
+            <div id="choice0" class="choiceDigit">10</div>
+        </div>
+        <script src="main.js"></script>
+    </body>
+</html>
