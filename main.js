@@ -1,10 +1,10 @@
-let totalTime = 4000;
+let totalTime = 6000;
 let timeLeft = totalTime;
 let paused = false;
 const timeBar = document.getElementById("timeBar");
 let loopID = undefined;
 let delay = 20;
-let input = "";
+let input = "_";
 let difficult = false;
 let choices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let sum = 1;
@@ -14,17 +14,22 @@ let wrongExcersizes = [];
 let randIndex;
 let randMistake;
 let timeout = undefined;
+let temp123 = ["rgb(0, 198, 0)", "rgb(0, 198, 0)", "rgb(0, 198, 0)"];
 
 //function for splitting
 function splitSum(difficulty, sum) {
-    let num1 = Math.round(Math.random() * (sum - 2 * difficulty)) + 1 * difficulty;
+    let num1 = Math.round(Math.random() * (sum - 4 * difficulty)) + 2 * difficulty;
     let num2 = sum - num1;
     return [num1, num2];
 }
 
 //function for choosing from an array
 function generateSum(acceptedSums, difficulty) {
-    let randomSum = acceptedSums[Math.round(Math.random() * (acceptedSums.length - 1))];
+    let acceptedSums2 = acceptedSums;
+    if (difficulty) {
+        acceptedSums2 = acceptedSums.filter((e) => e > 3);
+    }
+    let randomSum = acceptedSums2[Math.round(Math.random() * (acceptedSums2.length - 1))];
     let [num1, num2] = splitSum(difficulty, randomSum);
     return [randomSum, num1, num2];
 }
@@ -156,11 +161,37 @@ document.getElementById("easy").addEventListener("click", () => {
     difficult = false;
     document.getElementById("easy").style.boxShadow = "white 0 0 0 4px inset";
     document.getElementById("hard").style.boxShadow = "none";
+    //reshow 1, 2 and 3
+    document.getElementById("choice1").style.pointerEvents = "all";
+    document.getElementById("choice2").style.pointerEvents = "all";
+    document.getElementById("choice3").style.pointerEvents = "all";
+    if (choices.includes(1)) {
+        document.getElementById("choice1").style.backgroundColor = "rgb(0, 198, 0)";
+    } else {
+        document.getElementById("choice1").style.backgroundColor = "red";
+    }
+    if (choices.includes(2)) {
+        document.getElementById("choice2").style.backgroundColor = "rgb(0, 198, 0)";
+    } else {
+        document.getElementById("choice2").style.backgroundColor = "red";
+    }
+    if (choices.includes(3)) {
+        document.getElementById("choice3").style.backgroundColor = "rgb(0, 198, 0)";
+    } else {
+        document.getElementById("choice3").style.backgroundColor = "red";
+    }
 });
 document.getElementById("hard").addEventListener("click", () => {
     difficult = true;
     document.getElementById("hard").style.boxShadow = "white 0 0 0 4px inset";
     document.getElementById("easy").style.boxShadow = "none";
+    //make 1,2 and 3 black bc they're illegal immigrants or smth idk
+    document.getElementById("choice1").style.backgroundColor = "#494949";
+    document.getElementById("choice2").style.backgroundColor = "#494949";
+    document.getElementById("choice3").style.backgroundColor = "#494949";
+    document.getElementById("choice1").style.pointerEvents = "none";
+    document.getElementById("choice2").style.pointerEvents = "none";
+    document.getElementById("choice3").style.pointerEvents = "none";
 });
 
 //show input
@@ -185,9 +216,32 @@ document.getElementById("choiceContainer").addEventListener("click", () => {
 window.addEventListener("click", () => {
     if (loopID === undefined) {
         loopID = window.setInterval(() => {
-            checkInput();
-            timeLeft -= delay;
-            document.getElementById("timeBar").style.width = (timeLeft / totalTime) * 100 + "%";
+            if (!paused) {
+                checkInput();
+                timeLeft -= delay;
+                document.getElementById("timeBar").style.width = (timeLeft / totalTime) * 100 + "%";
+            }
         }, delay);
+    }
+});
+
+//pause screen
+document.getElementById("pauseBtn").addEventListener("click", () => {
+    paused = !paused;
+    const pauseScreen = document.getElementById("pauseScreen");
+    if (paused) {
+        document.getElementById("pauseBtn").innerHTML = "🞂";
+        document.getElementById("sumId").innerHTML = "?";
+        document.getElementById("splitLeft").innerHTML = "?";
+        document.getElementById("splitRight").innerHTML = "?";
+        document.getElementById("inputContainer").style.pointerEvents = "none";
+        document.getElementById("delete").style.pointerEvents = "none";
+    } else {
+        document.getElementById("pauseBtn").innerHTML = "||";
+        document.getElementById("sumId").innerHTML = sum;
+        document.getElementById("splitLeft").innerHTML = num1;
+        document.getElementById("splitRight").innerHTML = input;
+        document.getElementById("inputContainer").style.pointerEvents = "all";
+        document.getElementById("delete").style.pointerEvents = "all";
     }
 });

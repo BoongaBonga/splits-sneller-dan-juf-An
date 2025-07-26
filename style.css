@@ -107,14 +107,14 @@ line {
 #easy {
     border-width: clamp(0.15rem, 0.5vw, 0.3rem);
     border-style: solid solid solid none;
-    background-color: #00c600;
+    background-color: #ffb17c;
     box-shadow: white 0 0 0 4px inset;
     padding: 4px;
 }
 #hard {
     border-width: clamp(0.15rem, 0.5vw, 0.3rem);
     border-style: none solid solid none;
-    background-color: orangered;
+    background-color: #ff7f27;
     padding: 4px;
 }
 #choiceContainer {
@@ -176,4 +176,21 @@ line {
     50% {
         background-color: transparent;
     }
+}
+#pauseBtn {
+    position: absolute;
+    right: 0;
+    top: 4vh;
+    font-weight: 900;
+}
+#pauseScreen {
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.71);
 }
